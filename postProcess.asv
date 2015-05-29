@@ -1,0 +1,30 @@
+%set_param('simRouteA','StopFcn','postProcess');
+
+disp('Simulation finished!');
+disp('Running post-processing...');
+
+cd('post processing/');
+
+global routeA rawBusA;
+
+% initialises name and distance of bus stops
+initHardcodeData;
+importRawDataBusOp;
+importRawDataPaxActiv;
+analyseBusID;
+analysePaxActiv_new;
+calcAvgWait;
+logPaxActiv_new;
+recordDebugData; % saves debug data
+
+barPlotAvgWa;
+plotBusOp;
+plotGraphsAtStops;
+
+%gui_stop();
+
+cd('../');
+
+save('./output/wrkSpcPTSim.mat');
+
+disp('Post-processing finished!');
